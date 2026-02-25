@@ -20,7 +20,7 @@ export default function HeroSection() {
         {/* Profile image */}
         <div className="relative w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden animate-glow-pulse">
           <Image
-            src="/images/sophia-smiles-poster.jpg"
+            src="/images/banner.png"
             alt="Tiffani D"
             fill
             className="object-cover"

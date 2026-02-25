@@ -20,7 +20,7 @@ export default function HeroBanner() {
         {/* Logo */}
         <div className="mb-6">
           <Image
-            src="/images/htf-logo.jpeg"
+            src="/images/htf-logo.png"
             alt="Heal The Fatherless"
             width={100}
             height={100}

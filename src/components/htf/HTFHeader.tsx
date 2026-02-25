@@ -7,7 +7,7 @@ export default function HTFHeader() {
       <div className="max-w-5xl mx-auto flex items-center justify-between px-6 py-3">
         <Link href="/htf" className="group flex items-center gap-3">
           <Image
-            src="/images/htf-logo.jpeg"
+            src="/images/htf-logo.png"
             alt="Heal The Fatherless"
             width={40}
             height={40}

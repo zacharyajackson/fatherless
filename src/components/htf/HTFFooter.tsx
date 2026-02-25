@@ -48,7 +48,7 @@ export default function HTFFooter() {
 
         <AnimateIn className="relative z-10 max-w-3xl mx-auto text-center px-6 py-20">
           <Image
-            src="/images/htf-logo.jpeg"
+            src="/images/htf-logo.png"
             alt="Heal The Fatherless"
             width={64}
             height={64}

@@ -43,7 +43,7 @@ export default function HeroSection() {
 
       {/* Tagline */}
       <p className="mt-1 text-sm tracking-[0.25em] uppercase text-white/40 font-[family-name:var(--font-dm-sans)] font-300">
-        Charlotte, NC &nbsp;&middot;&nbsp; Rapper &nbsp;&middot;&nbsp; Storyteller
+        Actor &nbsp;&middot;&nbsp; Rapper &nbsp;&middot;&nbsp; Storyteller
       </p>
 
       {/* Decorative gold line */}

@@ -37,7 +37,7 @@ export default function ArtistPage() {
           </svg>
         </Link>
         <p className="text-white/10 text-[10px] font-[family-name:var(--font-dm-sans)] mt-4 tracking-wider">
-          &copy; {new Date().getFullYear()} Tiffani D
+          &copy; 2021-2026 TIFFANI D. All Rights Reserved.
         </p>
       </AnimateIn>
     </div>

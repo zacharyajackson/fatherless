@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import HTFHeader from "@/components/htf/HTFHeader";
 import HeroBanner from "@/components/htf/HeroBanner";
-import UpdatesSection from "@/components/htf/UpdatesSection";
-import ProductsSection from "@/components/htf/ProductsSection";
 import HTFFooter from "@/components/htf/HTFFooter";
 
 export const metadata: Metadata = {
@@ -23,8 +21,6 @@ export default function HTFPage() {
             <path d="M0 48h1440V0c-240 32-480 48-720 32S240 16 0 48z" />
           </svg>
         </div>
-        <UpdatesSection />
-        <ProductsSection />
       </main>
       <HTFFooter />
     </div>

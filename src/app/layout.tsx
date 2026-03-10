@@ -21,9 +21,9 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-  title: "Tiffani D | Rapper | Storyteller",
+  title: "TIFFANI D | Actor | Rapper | Storyteller",
   description:
-    "Official website for Tiffani D — Charlotte, NC rapper, storyteller, and founder of Heal The Fatherless.",
+    "Official website for TIFFANI D — actor, rapper, storyteller, and founder of Heal The Fatherless.",
 };
 
 export default function RootLayout({

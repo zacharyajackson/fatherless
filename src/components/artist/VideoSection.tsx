@@ -74,7 +74,7 @@ export default function VideoSection() {
       <div className="px-6 max-w-xl mx-auto mt-4">
         <AnimateIn delay={450}>
           <div className="group relative block">
-            <div className="aspect-[3/4] rounded-xl overflow-hidden relative max-w-[50%]">
+            <div className="aspect-[3/4] rounded-xl overflow-hidden relative max-w-[50%] mx-auto">
               <Image
                 src="/images/sophia-smiles-poster.jpg"
                 alt="Tiffani D - Sophia Smiles"

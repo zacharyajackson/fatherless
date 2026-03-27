@@ -18,7 +18,7 @@ export default function HTFHeader() {
         </a>
 
         <a
-          href="https://thetiffanid.com"
+          href="https://tiffanid.com"
           className="group flex items-center gap-2 text-brown-light/50 hover:text-brown text-xs font-[family-name:var(--font-dm-sans)] tracking-wide transition-colors duration-300"
         >
           <svg className="w-3 h-3 group-hover:-translate-x-0.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">

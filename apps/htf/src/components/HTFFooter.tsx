@@ -86,7 +86,7 @@ export default function HTFFooter() {
               reserved.
             </p>
             <a
-              href="https://thetiffanid.com"
+              href="https://tiffanid.com"
               className="group inline-flex items-center gap-2 font-[family-name:var(--font-dm-sans)] text-htf-gold/40 hover:text-htf-gold text-[11px] tracking-wide transition-colors duration-300"
             >
               <svg className="w-3 h-3 group-hover:-translate-x-0.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">

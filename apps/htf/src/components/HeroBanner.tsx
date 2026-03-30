@@ -24,7 +24,7 @@ export default function HeroBanner() {
             alt="Heal The Fatherless"
             width={100}
             height={100}
-            className="rounded-full mx-auto shadow-lg shadow-black/5"
+            className="rounded-full mx-auto shadow-lg shadow-black/5 grayscale contrast-125"
           />
         </div>
 

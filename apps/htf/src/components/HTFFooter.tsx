@@ -51,7 +51,7 @@ export default function HTFFooter() {
             alt="Heal The Fatherless"
             width={64}
             height={64}
-            className="rounded-full mx-auto mb-6 opacity-80"
+            className="rounded-full mx-auto mb-6 opacity-80 grayscale contrast-125 invert"
           />
           <h3 className="font-[family-name:var(--font-fraunces)] text-3xl md:text-4xl font-700 text-white mb-4">
             Join The Movement

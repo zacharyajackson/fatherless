@@ -11,13 +11,13 @@ export const metadata: Metadata = {
 
 export default function HTFPage() {
   return (
-    <div className="min-h-screen bg-cream text-brown">
+    <div className="min-h-screen bg-htf-bg text-htf-fg">
       <HTFHeader />
       <main>
         <HeroBanner />
         {/* Wave divider */}
         <div className="relative -mt-1">
-          <svg className="w-full h-12 text-cream" viewBox="0 0 1440 48" preserveAspectRatio="none" fill="currentColor">
+          <svg className="w-full h-12 text-htf-bg" viewBox="0 0 1440 48" preserveAspectRatio="none" fill="currentColor">
             <path d="M0 48h1440V0c-240 32-480 48-720 32S240 16 0 48z" />
           </svg>
         </div>

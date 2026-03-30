@@ -1,15 +1,17 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* HTF warm palette */
-  --color-cream: #FEFCF6;
-  --color-cream-dark: #FFF3E0;
-  --color-cream-warm: #FFF8EC;
-  --color-brown: #3D2010;
-  --color-brown-light: #7D5A3C;
-  --color-brown-mid: #5C3A1E;
-  --color-htf-gold: #C8981E;
-  --color-htf-gold-light: #E0B44F;
+  /* HTF black & white palette */
+  --color-htf-bg: #FFFFFF;
+  --color-htf-bg-subtle: #FAFAFA;
+  --color-htf-bg-muted: #F5F5F5;
+  --color-htf-fg: #0A0A0A;
+  --color-htf-fg-muted: #525252;
+  --color-htf-fg-subtle: #A3A3A3;
+  --color-htf-border: #E5E5E5;
+  --color-htf-border-strong: #D4D4D4;
+  --color-htf-accent: #171717;
+  --color-htf-accent-hover: #404040;
 
   /* Animations */
   --animate-fade-up: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;

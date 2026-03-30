@@ -35,13 +35,13 @@ export default function HTFFooter() {
   return (
     <footer className="relative overflow-hidden">
       {/* Top decorative border */}
-      <div className="h-px bg-gradient-to-r from-transparent via-htf-gold/20 to-transparent" />
+      <div className="h-px bg-gradient-to-r from-transparent via-htf-border-strong to-transparent" />
 
       {/* Community CTA Section */}
-      <div className="bg-brown relative">
+      <div className="bg-htf-fg relative">
         {/* Texture overlay */}
         <div className="absolute inset-0 opacity-[0.03]" style={{
-          backgroundImage: "radial-gradient(circle at 1px 1px, #FEFCF6 0.5px, transparent 0)",
+          backgroundImage: "radial-gradient(circle at 1px 1px, #FFFFFF 0.5px, transparent 0)",
           backgroundSize: "20px 20px",
         }} />
 
@@ -53,10 +53,10 @@ export default function HTFFooter() {
             height={64}
             className="rounded-full mx-auto mb-6 opacity-80"
           />
-          <h3 className="font-[family-name:var(--font-fraunces)] text-3xl md:text-4xl font-700 text-cream mb-4">
+          <h3 className="font-[family-name:var(--font-fraunces)] text-3xl md:text-4xl font-700 text-white mb-4">
             Join The Movement
           </h3>
-          <p className="font-[family-name:var(--font-dm-sans)] text-cream/40 text-sm leading-relaxed max-w-md mx-auto mb-10">
+          <p className="font-[family-name:var(--font-dm-sans)] text-white/40 text-sm leading-relaxed max-w-md mx-auto mb-10">
             Connect with us and be part of a community dedicated to healing,
             growth, and empowerment.
           </p>
@@ -70,7 +70,7 @@ export default function HTFFooter() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.name}
-                className="group w-10 h-10 rounded-full border border-cream/10 flex items-center justify-center text-cream/30 hover:text-cream hover:border-htf-gold hover:bg-htf-gold/10 transition-all duration-300"
+                className="group w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/30 hover:text-white hover:border-white/40 hover:bg-white/10 transition-all duration-300"
               >
                 {social.icon}
               </a>
@@ -79,15 +79,15 @@ export default function HTFFooter() {
         </AnimateIn>
 
         {/* Bottom bar */}
-        <div className="relative z-10 border-t border-cream/[0.06] px-6 py-5">
+        <div className="relative z-10 border-t border-white/[0.06] px-6 py-5">
           <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-            <p className="font-[family-name:var(--font-dm-sans)] text-cream/20 text-[11px] tracking-wide">
+            <p className="font-[family-name:var(--font-dm-sans)] text-white/20 text-[11px] tracking-wide">
               &copy; {new Date().getFullYear()} Heal The Fatherless. All rights
               reserved.
             </p>
             <a
               href="https://tiffanid.com"
-              className="group inline-flex items-center gap-2 font-[family-name:var(--font-dm-sans)] text-htf-gold/40 hover:text-htf-gold text-[11px] tracking-wide transition-colors duration-300"
+              className="group inline-flex items-center gap-2 font-[family-name:var(--font-dm-sans)] text-white/40 hover:text-white text-[11px] tracking-wide transition-colors duration-300"
             >
               <svg className="w-3 h-3 group-hover:-translate-x-0.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />

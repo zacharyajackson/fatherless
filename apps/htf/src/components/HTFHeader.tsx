@@ -10,7 +10,7 @@ export default function HTFHeader() {
             alt="Heal The Fatherless"
             width={40}
             height={40}
-            className="rounded-full"
+            className="rounded-full grayscale contrast-125"
           />
           <span className="font-[family-name:var(--font-fraunces)] text-htf-fg font-600 text-sm tracking-wide hidden sm:block">
             Heal The Fatherless

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
-const PROMO_CODE = "FSFREE";
+const PROMO_CODE = "SSFREE";
 
 export async function POST(req: NextRequest) {
   const { amount, email, promoCode } = await req.json();

@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-
 export async function POST(req: NextRequest) {
   const { amount, email } = await req.json();
   const origin = req.headers.get("origin") || "https://healthefatherless.com";
@@ -18,6 +16,8 @@ export async function POST(req: NextRequest) {
   if (amount < 50) {
     return NextResponse.json({ error: "Minimum paid amount is $1" }, { status: 400 });
   }
+
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],

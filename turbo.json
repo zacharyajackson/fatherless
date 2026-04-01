@@ -3,6 +3,7 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
+      "env": ["STRIPE_SECRET_KEY", "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY", "BLOB_READ_WRITE_TOKEN"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "dev": {

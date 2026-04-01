@@ -45,7 +45,7 @@ export default function HTFFooter() {
           backgroundSize: "20px 20px",
         }} />
 
-        <AnimateIn className="relative z-10 max-w-3xl mx-auto text-center px-6 py-20">
+        <AnimateIn className="relative z-10 max-w-3xl mx-auto text-center px-4 sm:px-6 py-12 sm:py-20">
           <Image
             src="/images/htf-hero-logo.jpg"
             alt="Heal The Fatherless"
@@ -53,7 +53,7 @@ export default function HTFFooter() {
             height={80}
             className="mx-auto mb-6 opacity-80"
           />
-          <h3 className="font-[family-name:var(--font-fraunces)] text-3xl md:text-4xl font-700 text-white mb-4">
+          <h3 className="font-[family-name:var(--font-fraunces)] text-2xl sm:text-3xl md:text-4xl font-700 text-white mb-4">
             Join The Movement
           </h3>
           <p className="font-[family-name:var(--font-dm-sans)] text-white/40 text-sm leading-relaxed max-w-md mx-auto mb-10">

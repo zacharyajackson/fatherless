@@ -2,8 +2,6 @@ import { redirect } from "next/navigation";
 import Stripe from "stripe";
 import SuccessVideo from "./SuccessVideo";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-
 export default async function SuccessPage({
   searchParams,
 }: {
@@ -20,6 +18,8 @@ export default async function SuccessPage({
   if (!session_id) {
     redirect("/watch");
   }
+
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
   let session;
   try {

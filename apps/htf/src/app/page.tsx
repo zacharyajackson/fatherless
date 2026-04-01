@@ -3,9 +3,33 @@ import Link from "next/link";
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-black text-white">
-      {/* Flyer Hero */}
-      <section className="relative">
+    <>
+      {/* HTF Hero Logo — Full Viewport */}
+      <section className="h-screen bg-black flex flex-col items-center justify-center relative overflow-hidden">
+        {/* Subtle radial glow behind logo */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.03)_0%,_transparent_60%)]" />
+
+        <div className="animate-scale-in relative">
+          <Image
+            src="/images/htf-hero-logo.jpg"
+            alt="HTF — Heal The Fatherless"
+            width={800}
+            height={800}
+            className="w-[85vw] max-w-[600px] h-auto"
+            priority
+          />
+        </div>
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 animate-float">
+          <svg className="w-5 h-5 text-white/20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
+        </div>
+      </section>
+
+      {/* Flyer */}
+      <section className="bg-black">
         <div className="max-w-2xl mx-auto">
           <Image
             src="/images/sophia-smiles-flyer.jpg"
@@ -13,26 +37,26 @@ export default function HomePage() {
             width={800}
             height={1100}
             className="w-full h-auto"
-            priority
           />
         </div>
       </section>
 
       {/* Trailer + CTA */}
-      <section className="px-6 py-12 max-w-3xl mx-auto">
-        <h2 className="font-[family-name:var(--font-fraunces)] text-2xl md:text-3xl font-700 text-center mb-2">
+      <section className="px-6 py-16 max-w-3xl mx-auto">
+        <h2 className="font-[family-name:var(--font-fraunces)] text-3xl md:text-4xl font-800 text-center text-htf-fg mb-2">
           Watch The Trailer
         </h2>
-        <p className="text-white/40 text-sm font-[family-name:var(--font-dm-sans)] text-center mb-8">
+        <p className="text-htf-fg-muted text-sm font-[family-name:var(--font-dm-sans)] text-center mb-10">
           A moving story about the struggles of a single mother
         </p>
 
-        <div className="rounded-2xl overflow-hidden bg-white/5 mb-10">
+        <div className="rounded-2xl overflow-hidden bg-htf-bg-muted mb-12 shadow-xl shadow-black/5">
           <video
             className="w-full aspect-video object-cover"
             controls
             playsInline
             preload="metadata"
+            poster="/images/trailer-poster.jpg"
           >
             <source src="/images/sophia-smiles-trailer.mp4" type="video/mp4" />
           </video>
@@ -42,31 +66,18 @@ export default function HomePage() {
         <div className="text-center">
           <Link
             href="/watch"
-            className="group inline-flex items-center gap-3 bg-white text-black font-[family-name:var(--font-dm-sans)] font-600 text-base px-10 py-4 rounded-full transition-all duration-300 hover:bg-white/90 shadow-lg shadow-white/10 hover:shadow-xl hover:shadow-white/15"
+            className="group inline-flex items-center gap-3 bg-htf-accent hover:bg-htf-accent-hover text-white font-[family-name:var(--font-dm-sans)] font-600 text-lg px-12 py-5 rounded-full transition-all duration-300 shadow-xl shadow-black/15 hover:shadow-2xl hover:shadow-black/20 hover:scale-[1.02]"
           >
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
               <path d="M8 5v14l11-7z" />
             </svg>
             <span>Watch Now</span>
           </Link>
-          <p className="mt-4 text-white/30 text-xs font-[family-name:var(--font-dm-sans)]">
+          <p className="mt-5 text-htf-fg-subtle text-sm font-[family-name:var(--font-dm-sans)]">
             Pay what you want to support the film
           </p>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="border-t border-white/[0.06] px-6 py-6 text-center">
-        <p className="text-white/20 text-[11px] font-[family-name:var(--font-dm-sans)] tracking-wide">
-          &copy; {new Date().getFullYear()} Heal The Fatherless. All rights reserved.
-        </p>
-        <a
-          href="https://tiffanid.com"
-          className="inline-block mt-2 text-white/30 hover:text-white/60 text-[11px] font-[family-name:var(--font-dm-sans)] tracking-wide transition-colors"
-        >
-          Tiffani D Artist Page &rarr;
-        </a>
-      </footer>
-    </div>
+    </>
   );
 }

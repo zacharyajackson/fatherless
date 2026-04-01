@@ -7,10 +7,16 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 export default async function SuccessPage({
   searchParams,
 }: {
-  searchParams: Promise<{ session_id?: string }>;
+  searchParams: Promise<{ session_id?: string; free?: string }>;
 }) {
-  const { session_id } = await searchParams;
+  const { session_id, free } = await searchParams;
 
+  // Allow free access
+  if (free === "1") {
+    return <SuccessLayout paid={false} />;
+  }
+
+  // Verify paid access via Stripe
   if (!session_id) {
     redirect("/watch");
   }
@@ -26,22 +32,26 @@ export default async function SuccessPage({
     redirect("/watch");
   }
 
+  return <SuccessLayout paid={true} />;
+}
+
+function SuccessLayout({ paid }: { paid: boolean }) {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="py-10">
       {/* Header */}
-      <div className="text-center px-6 pt-10 pb-6">
-        <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2 mb-4">
-          <svg className="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div className="text-center px-6 pb-6">
+        <div className="inline-flex items-center gap-2 bg-htf-bg-muted border border-htf-border rounded-full px-4 py-2 mb-4">
+          <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
-          <span className="text-white/60 text-xs font-[family-name:var(--font-dm-sans)]">
-            Payment successful — thank you for your support
+          <span className="text-htf-fg-muted text-xs font-[family-name:var(--font-dm-sans)]">
+            {paid ? "Payment successful — thank you for your support" : "Thank you — enjoy the film"}
           </span>
         </div>
-        <h1 className="font-[family-name:var(--font-fraunces)] text-3xl md:text-4xl font-700">
+        <h1 className="font-[family-name:var(--font-fraunces)] text-3xl md:text-4xl font-700 text-htf-fg">
           Sophia Smiles
         </h1>
-        <p className="text-white/40 text-sm font-[family-name:var(--font-dm-sans)] mt-2">
+        <p className="text-htf-fg-muted text-sm font-[family-name:var(--font-dm-sans)] mt-2">
           A Film by Tiffani D
         </p>
       </div>
@@ -51,15 +61,9 @@ export default async function SuccessPage({
         <SuccessVideo />
 
         <div className="mt-8 text-center">
-          <p className="text-white/30 text-xs font-[family-name:var(--font-dm-sans)]">
+          <p className="text-htf-fg-subtle text-xs font-[family-name:var(--font-dm-sans)]">
             This video is for your personal viewing only. Please do not share or redistribute.
           </p>
-          <a
-            href="https://tiffanid.com"
-            className="inline-block mt-4 text-white/40 hover:text-white/70 text-xs font-[family-name:var(--font-dm-sans)] transition-colors"
-          >
-            Visit Tiffani D &rarr;
-          </a>
         </div>
       </div>
     </div>

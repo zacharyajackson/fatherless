@@ -12,13 +12,12 @@ export default function WatchPage() {
     e.preventDefault();
     setLoading(true);
 
+    const amountCents = Math.max(0, Math.round(parseFloat(amount || "0") * 100));
+
     const res = await fetch("/api/checkout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        amount: Math.max(1, Math.round(parseFloat(amount) * 100)),
-        email,
-      }),
+      body: JSON.stringify({ amount: amountCents, email }),
     });
 
     const data = await res.json();
@@ -30,8 +29,10 @@ export default function WatchPage() {
     }
   };
 
+  const displayAmount = parseFloat(amount || "0");
+
   return (
-    <div className="min-h-screen bg-black text-white flex items-center justify-center px-6 py-12">
+    <div className="flex items-center justify-center px-6 py-12">
       <div className="w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-10">
@@ -40,12 +41,12 @@ export default function WatchPage() {
             alt="Sophia Smiles"
             width={200}
             height={275}
-            className="mx-auto rounded-xl mb-6 shadow-2xl shadow-white/5"
+            className="mx-auto rounded-xl mb-6 shadow-2xl shadow-black/10"
           />
-          <h1 className="font-[family-name:var(--font-fraunces)] text-3xl font-700 mb-2">
+          <h1 className="font-[family-name:var(--font-fraunces)] text-3xl font-700 text-htf-fg mb-2">
             Watch Sophia Smiles
           </h1>
-          <p className="text-white/40 text-sm font-[family-name:var(--font-dm-sans)]">
+          <p className="text-htf-fg-muted text-sm font-[family-name:var(--font-dm-sans)]">
             Pay what you want to support the film
           </p>
         </div>
@@ -56,7 +57,7 @@ export default function WatchPage() {
           <div>
             <label
               htmlFor="email"
-              className="block text-white/50 text-xs font-[family-name:var(--font-dm-sans)] font-500 mb-2 tracking-wide uppercase"
+              className="block text-htf-fg-muted text-xs font-[family-name:var(--font-dm-sans)] font-500 mb-2 tracking-wide uppercase"
             >
               Email
             </label>
@@ -67,7 +68,7 @@ export default function WatchPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="your@email.com"
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3.5 text-white font-[family-name:var(--font-dm-sans)] text-sm placeholder:text-white/20 focus:outline-none focus:border-white/30 transition-colors"
+              className="w-full bg-htf-bg-muted border border-htf-border rounded-xl px-4 py-3.5 text-htf-fg font-[family-name:var(--font-dm-sans)] text-sm placeholder:text-htf-fg-subtle focus:outline-none focus:border-htf-border-strong transition-colors"
             />
           </div>
 
@@ -75,44 +76,44 @@ export default function WatchPage() {
           <div>
             <label
               htmlFor="amount"
-              className="block text-white/50 text-xs font-[family-name:var(--font-dm-sans)] font-500 mb-2 tracking-wide uppercase"
+              className="block text-htf-fg-muted text-xs font-[family-name:var(--font-dm-sans)] font-500 mb-2 tracking-wide uppercase"
             >
               Amount (USD)
             </label>
             <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30 font-[family-name:var(--font-dm-sans)]">
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-htf-fg-subtle font-[family-name:var(--font-dm-sans)]">
                 $
               </span>
               <input
                 id="amount"
                 type="number"
-                min="1"
+                min="0"
                 step="1"
                 required
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-xl pl-8 pr-4 py-3.5 text-white font-[family-name:var(--font-dm-sans)] text-sm placeholder:text-white/20 focus:outline-none focus:border-white/30 transition-colors"
+                className="w-full bg-htf-bg-muted border border-htf-border rounded-xl pl-8 pr-4 py-3.5 text-htf-fg font-[family-name:var(--font-dm-sans)] text-sm placeholder:text-htf-fg-subtle focus:outline-none focus:border-htf-border-strong transition-colors"
               />
             </div>
-            <p className="mt-1.5 text-white/20 text-[11px] font-[family-name:var(--font-dm-sans)]">
-              Minimum $1 — every dollar supports the mission
+            <p className="mt-1.5 text-htf-fg-subtle text-[11px] font-[family-name:var(--font-dm-sans)]">
+              Enter $0 for free — any amount supports the mission
             </p>
           </div>
 
           {/* Quick amounts */}
           <div className="flex gap-2">
-            {["3", "5", "10", "25"].map((val) => (
+            {["0", "5", "10", "25"].map((val) => (
               <button
                 key={val}
                 type="button"
                 onClick={() => setAmount(val)}
                 className={`flex-1 py-2.5 rounded-lg text-sm font-[family-name:var(--font-dm-sans)] font-500 transition-all duration-200 ${
                   amount === val
-                    ? "bg-white text-black"
-                    : "bg-white/5 text-white/50 hover:bg-white/10 border border-white/10"
+                    ? "bg-htf-accent text-white"
+                    : "bg-htf-bg-muted text-htf-fg-muted hover:bg-htf-bg-subtle border border-htf-border"
                 }`}
               >
-                ${val}
+                {val === "0" ? "Free" : `$${val}`}
               </button>
             ))}
           </div>
@@ -121,9 +122,13 @@ export default function WatchPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-white text-black font-[family-name:var(--font-dm-sans)] font-600 text-sm py-4 rounded-full transition-all duration-300 hover:bg-white/90 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-white/10"
+            className="w-full bg-htf-accent hover:bg-htf-accent-hover text-white font-[family-name:var(--font-dm-sans)] font-600 text-sm py-4 rounded-full transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-black/10"
           >
-            {loading ? "Redirecting to checkout..." : `Pay $${amount || "0"} & Watch`}
+            {loading
+              ? "Redirecting..."
+              : displayAmount > 0
+                ? `Pay $${amount} & Watch`
+                : "Watch for Free"}
           </button>
         </form>
 
@@ -131,7 +136,7 @@ export default function WatchPage() {
         <div className="mt-8 text-center">
           <a
             href="/"
-            className="text-white/30 hover:text-white/60 text-xs font-[family-name:var(--font-dm-sans)] transition-colors"
+            className="text-htf-fg-subtle hover:text-htf-fg-muted text-xs font-[family-name:var(--font-dm-sans)] transition-colors"
           >
             &larr; Back to trailer
           </a>

@@ -5,12 +5,19 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 export async function POST(req: NextRequest) {
   const { amount, email } = await req.json();
+  const origin = req.headers.get("origin") || "https://healthefatherless.com";
 
-  if (!amount || amount < 100) {
-    return NextResponse.json({ error: "Minimum amount is $1" }, { status: 400 });
+  // Free access — skip Stripe
+  if (!amount || amount === 0) {
+    return NextResponse.json({
+      url: `${origin}/watch/success?free=1&email=${encodeURIComponent(email || "")}`,
+    });
   }
 
-  const origin = req.headers.get("origin") || "https://healthefatherless.com";
+  // Stripe minimum is $0.50 (50 cents)
+  if (amount < 50) {
+    return NextResponse.json({ error: "Minimum paid amount is $1" }, { status: 400 });
+  }
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],

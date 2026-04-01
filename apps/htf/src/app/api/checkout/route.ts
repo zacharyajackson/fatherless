@@ -1,20 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
+const PROMO_CODE = "FSFREE";
+
 export async function POST(req: NextRequest) {
-  const { amount, email } = await req.json();
+  const { amount, email, promoCode } = await req.json();
   const origin = req.headers.get("origin") || "https://healthefatherless.com";
 
-  // Free access — skip Stripe
-  if (!amount || amount === 0) {
+  // Promo code grants free access
+  if (promoCode && promoCode.toUpperCase() === PROMO_CODE) {
     return NextResponse.json({
       url: `${origin}/watch/success?free=1&email=${encodeURIComponent(email || "")}`,
     });
   }
 
-  // Stripe minimum is $0.50 (50 cents)
-  if (amount < 50) {
-    return NextResponse.json({ error: "Minimum paid amount is $1" }, { status: 400 });
+  // Minimum $3 (300 cents)
+  if (!amount || amount < 300) {
+    return NextResponse.json({ error: "Minimum amount is $3" }, { status: 400 });
   }
 
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);

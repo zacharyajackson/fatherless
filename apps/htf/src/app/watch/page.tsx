@@ -3,30 +3,40 @@
 import { useState } from "react";
 import Image from "next/image";
 
-
 export default function WatchPage() {
   const [amount, setAmount] = useState("5");
   const [email, setEmail] = useState("");
+  const [promoCode, setPromoCode] = useState("");
+  const [showPromo, setShowPromo] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError("");
 
     const amountCents = Math.max(0, Math.round(parseFloat(amount || "0") * 100));
+
+    // Validate minimum unless promo code is entered
+    if (!promoCode && amountCents < 300) {
+      setError("Minimum amount is $3");
+      setLoading(false);
+      return;
+    }
 
     const res = await fetch("/api/checkout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ amount: amountCents, email }),
+      body: JSON.stringify({ amount: amountCents, email, promoCode }),
     });
 
     const data = await res.json();
     if (data.url) {
       window.location.href = data.url;
     } else {
+      setError(data.error || "Something went wrong. Please try again.");
       setLoading(false);
-      alert("Something went wrong. Please try again.");
     }
   };
 
@@ -88,36 +98,71 @@ export default function WatchPage() {
               <input
                 id="amount"
                 type="number"
-                min="0"
+                min="3"
                 step="1"
                 required
                 value={amount}
-                onChange={(e) => setAmount(e.target.value)}
+                onChange={(e) => { setAmount(e.target.value); setError(""); }}
                 className="w-full bg-htf-bg-muted border border-htf-border rounded-xl pl-8 pr-4 py-3.5 text-htf-fg font-[family-name:var(--font-dm-sans)] text-sm placeholder:text-htf-fg-subtle focus:outline-none focus:border-htf-border-strong transition-colors"
               />
             </div>
             <p className="mt-1.5 text-htf-fg-subtle text-[11px] font-[family-name:var(--font-dm-sans)]">
-              Enter $0 for free — any amount supports the mission
+              Minimum $3 — every dollar supports the mission
             </p>
           </div>
 
           {/* Quick amounts */}
           <div className="flex gap-2">
-            {["0", "5", "10", "25"].map((val) => (
+            {["3", "5", "10", "25"].map((val) => (
               <button
                 key={val}
                 type="button"
-                onClick={() => setAmount(val)}
+                onClick={() => { setAmount(val); setError(""); }}
                 className={`flex-1 py-2.5 rounded-lg text-sm font-[family-name:var(--font-dm-sans)] font-500 transition-all duration-200 ${
                   amount === val
                     ? "bg-htf-accent text-white"
                     : "bg-htf-bg-muted text-htf-fg-muted hover:bg-htf-bg-subtle border border-htf-border"
                 }`}
               >
-                {val === "0" ? "Free" : `$${val}`}
+                ${val}
               </button>
             ))}
           </div>
+
+          {/* Promo Code */}
+          {!showPromo ? (
+            <button
+              type="button"
+              onClick={() => setShowPromo(true)}
+              className="text-htf-fg-subtle hover:text-htf-fg-muted text-xs font-[family-name:var(--font-dm-sans)] transition-colors"
+            >
+              Have a promo code?
+            </button>
+          ) : (
+            <div>
+              <label
+                htmlFor="promo"
+                className="block text-htf-fg-muted text-xs font-[family-name:var(--font-dm-sans)] font-500 mb-2 tracking-wide uppercase"
+              >
+                Promo Code
+              </label>
+              <input
+                id="promo"
+                type="text"
+                value={promoCode}
+                onChange={(e) => { setPromoCode(e.target.value.toUpperCase()); setError(""); }}
+                placeholder="Enter code"
+                className="w-full bg-htf-bg-muted border border-htf-border rounded-xl px-4 py-3.5 text-htf-fg font-[family-name:var(--font-dm-sans)] text-sm placeholder:text-htf-fg-subtle focus:outline-none focus:border-htf-border-strong transition-colors uppercase tracking-wider"
+              />
+            </div>
+          )}
+
+          {/* Error */}
+          {error && (
+            <p className="text-red-500 text-xs font-[family-name:var(--font-dm-sans)] text-center">
+              {error}
+            </p>
+          )}
 
           {/* Submit */}
           <button
@@ -127,9 +172,11 @@ export default function WatchPage() {
           >
             {loading
               ? "Redirecting..."
-              : displayAmount > 0
-                ? `Pay $${amount} & Watch`
-                : "Watch for Free"}
+              : promoCode
+                ? "Apply Code & Watch"
+                : displayAmount > 0
+                  ? `Pay $${amount} & Watch`
+                  : "Watch"}
           </button>
         </form>
 

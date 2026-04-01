@@ -15,7 +15,7 @@ const platforms = [
   {
     name: "Apple Music",
     sub: "Listen now",
-    url: "https://music.apple.com/us/artist/tiffani-d/1485498887",
+    url: "https://music.apple.com/us/artist/tiffani-d/1593096776",
     color: "#FC3C44",
     icon: (
       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">

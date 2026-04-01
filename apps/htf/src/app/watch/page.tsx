@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 
+
 export default function WatchPage() {
   const [amount, setAmount] = useState("5");
   const [email, setEmail] = useState("");

@@ -28,9 +28,9 @@ export default function HTFHeader() {
           <Image
             src="/images/htf-hero-logo.jpg"
             alt="Heal The Fatherless"
-            width={32}
-            height={32}
-            className="rounded sm:w-9 sm:h-9"
+            width={24}
+            height={24}
+            className="sm:w-7 sm:h-7"
           />
           <span className="font-[family-name:var(--font-fraunces)] text-htf-fg font-600 text-xs sm:text-sm tracking-wide">
             Heal The Fatherless

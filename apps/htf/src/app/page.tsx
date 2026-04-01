@@ -2,8 +2,29 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function HomePage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Movie",
+    name: "Sophia Smiles",
+    description:
+      "A moving story about the struggles of a single mother.",
+    director: { "@type": "Person", name: "Tiffani D", url: "https://tiffanid.com" },
+    productionCompany: {
+      "@type": "Organization",
+      name: "Heal The Fatherless",
+      url: "https://healthefatherless.com",
+    },
+    url: "https://healthefatherless.com",
+    image: "https://healthefatherless.com/images/og-image.jpg",
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* HTF Hero Logo — Full Viewport */}
       <section className="h-[100dvh] bg-black flex flex-col items-center justify-center relative overflow-hidden">
         {/* Subtle radial glow behind logo */}

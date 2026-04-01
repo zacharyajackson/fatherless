@@ -15,9 +15,9 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-  title: "Heal The Fatherless | Community, Healing, Empowerment",
+  title: "Sophia Smiles | A Film by Tiffani D",
   description:
-    "Empowering individuals impacted by fatherlessness through community, creativity, and connection.",
+    "A moving story about the struggles of a single mother. Watch now on Heal The Fatherless.",
 };
 
 export default function RootLayout({

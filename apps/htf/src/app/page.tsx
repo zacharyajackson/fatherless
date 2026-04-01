@@ -9,25 +9,24 @@ export default function HomePage() {
         {/* Subtle radial glow behind logo */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.03)_0%,_transparent_60%)]" />
 
-        <div className="animate-scale-in relative px-6">
+        <div className="relative px-6">
           <Image
             src="/images/htf-hero-logo.jpg"
             alt="HTF — Heal The Fatherless"
             width={800}
             height={800}
             className="w-[85vw] max-w-[600px] h-auto"
+            style={{ animation: "scale-in 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards, subtle-pulse 4s ease-in-out 2s infinite" }}
             priority
           />
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-6 sm:bottom-8 animate-float flex flex-col items-center gap-2">
-          <span className="text-white/20 text-[10px] font-[family-name:var(--font-dm-sans)] tracking-[0.2em] uppercase">
-            Scroll
+        <div className="absolute bottom-8 sm:bottom-10 animate-float flex flex-col items-center gap-3">
+          <span className="text-white text-xs sm:text-sm font-[family-name:var(--font-dm-sans)] font-500 tracking-[0.25em] uppercase">
+            Scroll Down
           </span>
-          <svg className="w-4 h-4 text-white/20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
+          <div className="w-px h-8 bg-gradient-to-b from-white to-white/20 animate-fade-in" />
         </div>
       </section>
 

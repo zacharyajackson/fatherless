@@ -43,6 +43,11 @@
   50% { transform: translateY(-6px); }
 }
 
+@keyframes subtle-pulse {
+  0%, 100% { opacity: 1; filter: brightness(1); }
+  50% { opacity: 0.85; filter: brightness(1.15); }
+}
+
 @keyframes wave {
   0%, 100% { transform: translateX(0) translateY(0); }
   25% { transform: translateX(5px) translateY(-8px); }

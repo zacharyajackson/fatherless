@@ -12,7 +12,7 @@ const updates = [
     date: "Jan 28, 2026",
     title: "New Podcast Episode: Finding Your Voice",
     excerpt:
-      "Tiffani D sits down with local mentors to discuss the power of storytelling in overcoming the absence of a father figure.",
+      "TIFFANI D sits down with local mentors to discuss the power of storytelling in overcoming the absence of a father figure.",
     featured: false,
   },
   {

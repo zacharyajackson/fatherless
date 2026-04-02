@@ -52,7 +52,7 @@ function SuccessLayout({ paid }: { paid: boolean }) {
           Sophia Smiles
         </h1>
         <p className="text-htf-fg-muted text-sm font-[family-name:var(--font-dm-sans)] mt-2">
-          A Film by Tiffani D
+          A Film by TIFFANI D
         </p>
       </div>
 

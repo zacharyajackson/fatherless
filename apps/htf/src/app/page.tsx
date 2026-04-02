@@ -8,7 +8,7 @@ export default function HomePage() {
     name: "Sophia Smiles",
     description:
       "A moving story about the struggles of a single mother.",
-    director: { "@type": "Person", name: "Tiffani D", url: "https://tiffanid.com" },
+    director: { "@type": "Person", name: "TIFFANI D", url: "https://tiffanid.com" },
     productionCompany: {
       "@type": "Organization",
       name: "Heal The Fatherless",
@@ -56,7 +56,7 @@ export default function HomePage() {
         <div className="max-w-2xl mx-auto px-4 sm:px-0">
           <Image
             src="/images/sophia-smiles-flyer.jpg"
-            alt="Sophia Smiles — A Film by Tiffani D"
+            alt="Sophia Smiles — A Film by TIFFANI D"
             width={800}
             height={1100}
             className="w-full h-auto"

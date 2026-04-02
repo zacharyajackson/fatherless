@@ -20,14 +20,14 @@ const siteUrl = "https://healthefatherless.com";
 
 export const metadata: Metadata = {
   title: {
-    default: "Sophia Smiles — A Film by Tiffani D | Heal The Fatherless",
+    default: "Sophia Smiles — A Film by TIFFANI D | Heal The Fatherless",
     template: "%s | Heal The Fatherless",
   },
   description:
-    "Watch Sophia Smiles — a moving story about the struggles of a single mother. A film by Tiffani D, presented by Heal The Fatherless.",
+    "Watch Sophia Smiles — a moving story about the struggles of a single mother. A film by TIFFANI D, presented by Heal The Fatherless.",
   keywords: [
     "Sophia Smiles",
-    "Tiffani D",
+    "TIFFANI D",
     "Heal The Fatherless",
     "HTF",
     "short film",
@@ -38,8 +38,8 @@ export const metadata: Metadata = {
     "healing",
     "empowerment",
   ],
-  authors: [{ name: "Tiffani D", url: "https://tiffanid.com" }],
-  creator: "Tiffani D",
+  authors: [{ name: "TIFFANI D", url: "https://tiffanid.com" }],
+  creator: "TIFFANI D",
   publisher: "Heal The Fatherless",
   metadataBase: new URL(siteUrl),
   alternates: {
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName: "Heal The Fatherless",
-    title: "Sophia Smiles — A Film by Tiffani D",
+    title: "Sophia Smiles — A Film by TIFFANI D",
     description:
       "A moving story about the struggles of a single mother. Watch now — pay what you want to support the mission.",
     images: [
@@ -58,13 +58,13 @@ export const metadata: Metadata = {
         url: "/images/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Sophia Smiles — A Film by Tiffani D",
+        alt: "Sophia Smiles — A Film by TIFFANI D",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sophia Smiles — A Film by Tiffani D",
+    title: "Sophia Smiles — A Film by TIFFANI D",
     description:
       "A moving story about the struggles of a single mother. Watch now on Heal The Fatherless.",
     images: ["/images/og-image.jpg"],
@@ -83,9 +83,9 @@ export const metadata: Metadata = {
   },
   other: {
     "ai:description":
-      "Heal The Fatherless (HTF) is a community organization founded by Tiffani D, dedicated to empowering individuals impacted by fatherlessness through community, creativity, and connection. The site features Sophia Smiles, an independent short film about the struggles of a single mother, available to watch with a pay-what-you-want model.",
+      "Heal The Fatherless (HTF) is a community organization founded by TIFFANI D, dedicated to empowering individuals impacted by fatherlessness through community, creativity, and connection. The site features Sophia Smiles, an independent short film about the struggles of a single mother, available to watch with a pay-what-you-want model.",
     "ai:site_type": "film_landing_page",
-    "ai:creator": "Tiffani D",
+    "ai:creator": "TIFFANI D",
     "ai:organization": "Heal The Fatherless",
   },
 };

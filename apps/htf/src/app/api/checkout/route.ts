@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
           currency: "usd",
           product_data: {
             name: "Sophia Smiles — Full Film",
-            description: "A moving story about the struggles of a single mother. A film by Tiffani D.",
+            description: "A moving story about the struggles of a single mother. A film by TIFFANI D.",
           },
           unit_amount: amount,
         },

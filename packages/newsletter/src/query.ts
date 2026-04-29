@@ -1,14 +1,5 @@
-import { Pool } from "pg";
 import type { Source } from "./types";
-import { buildPoolConfig } from "./pgConfig";
-
-let pool: Pool | null = null;
-
-function getPool(): Pool {
-  if (pool) return pool;
-  pool = new Pool(buildPoolConfig());
-  return pool;
-}
+import { getPool, ensureSchema } from "./pgConfig";
 
 export type SubscriberRow = {
   id: number;
@@ -24,6 +15,7 @@ export async function listSubscribers(opts: {
   source?: Source;
   limit?: number;
 }): Promise<SubscriberRow[]> {
+  await ensureSchema();
   const limit = Math.min(Math.max(opts.limit ?? 500, 1), 5000);
   const p = getPool();
   const params: unknown[] = [];
@@ -44,6 +36,7 @@ export async function listSubscribers(opts: {
 }
 
 export async function countBySource(): Promise<{ source: Source; count: number }[]> {
+  await ensureSchema();
   const p = getPool();
   const result = await p.query<{ source: Source; count: string }>(
     `SELECT source, COUNT(*)::text as count FROM subscribers GROUP BY source ORDER BY source`

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import NewsletterSection from "@/components/NewsletterSection";
 
 export default function HomePage() {
   const jsonLd = {
@@ -22,7 +23,9 @@ export default function HomePage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
       />
 
       {/* HTF Hero Logo — Full Viewport */}
@@ -101,6 +104,8 @@ export default function HomePage() {
           </p>
         </div>
       </section>
+
+      <NewsletterSection />
     </>
   );
 }

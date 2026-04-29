@@ -34,7 +34,9 @@ export default function ArtistPage() {
     <div className="min-h-screen bg-dark-bg text-white grain-overlay dark-scroll relative">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
       />
       <main className="max-w-2xl mx-auto relative z-10">
         <HeroSection />

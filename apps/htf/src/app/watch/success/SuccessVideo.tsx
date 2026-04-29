@@ -1,6 +1,10 @@
 "use client";
 
-export default function SuccessVideo() {
+export default function SuccessVideo({ sessionId }: { sessionId?: string }) {
+  const src = sessionId
+    ? `/api/film?session_id=${encodeURIComponent(sessionId)}`
+    : "/api/film";
+
   return (
     <div className="rounded-2xl overflow-hidden bg-htf-bg-muted border border-htf-border">
       <video
@@ -10,7 +14,7 @@ export default function SuccessVideo() {
         playsInline
         controlsList="nodownload"
       >
-        <source src="https://aeocstmxpo4h9be9.public.blob.vercel-storage.com/sophia-smiles-full.mp4" type="video/mp4" />
+        <source src={src} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
     </div>

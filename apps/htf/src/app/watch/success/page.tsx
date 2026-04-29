@@ -1,6 +1,8 @@
 import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 import Stripe from "stripe";
 import SuccessVideo from "./SuccessVideo";
+import { verifyFreeAccessToken, FREE_COOKIE_NAME } from "@/lib/freeAccess";
 
 export default async function SuccessPage({
   searchParams,
@@ -9,12 +11,17 @@ export default async function SuccessPage({
 }) {
   const { session_id, free } = await searchParams;
 
-  // Allow free access
+  // Free access requires a signed cookie set by /api/checkout when promo validates
   if (free === "1") {
-    return <SuccessLayout paid={false} />;
+    const cookieStore = await cookies();
+    const token = cookieStore.get(FREE_COOKIE_NAME)?.value;
+    if (!verifyFreeAccessToken(token)) {
+      redirect("/watch");
+    }
+    return <SuccessLayout paid={false} sessionId={undefined} />;
   }
 
-  // Verify paid access via Stripe
+  // Paid access — verify session via Stripe
   if (!session_id) {
     redirect("/watch");
   }
@@ -32,10 +39,10 @@ export default async function SuccessPage({
     redirect("/watch");
   }
 
-  return <SuccessLayout paid={true} />;
+  return <SuccessLayout paid={true} sessionId={session_id} />;
 }
 
-function SuccessLayout({ paid }: { paid: boolean }) {
+function SuccessLayout({ paid, sessionId }: { paid: boolean; sessionId: string | undefined }) {
   return (
     <div className="py-10">
       {/* Header */}
@@ -58,7 +65,7 @@ function SuccessLayout({ paid }: { paid: boolean }) {
 
       {/* Video Player */}
       <div className="max-w-4xl mx-auto px-6 pb-12">
-        <SuccessVideo />
+        <SuccessVideo sessionId={sessionId} />
 
         <div className="mt-8 text-center">
           <p className="text-htf-fg-subtle text-xs font-[family-name:var(--font-dm-sans)]">

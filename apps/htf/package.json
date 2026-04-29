@@ -3,16 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --port 3001",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
   },
   "dependencies": {
+    "@repo/newsletter": "*",
     "@repo/ui": "*",
     "@stripe/stripe-js": "^9.0.1",
     "@vercel/blob": "^2.3.2",
-    "next": "16.1.6",
+    "next": "16.2.4",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "stripe": "^21.0.1"
@@ -23,7 +24,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.1.6",
+    "eslint-config-next": "16.2.4",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

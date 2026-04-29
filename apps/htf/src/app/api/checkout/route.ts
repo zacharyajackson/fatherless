@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
+import { makeFreeAccessToken, FREE_COOKIE_NAME, FREE_TTL_SECONDS } from "@/lib/freeAccess";
 
 const PROMO_CODE = "SSFREE";
 
@@ -7,11 +8,20 @@ export async function POST(req: NextRequest) {
   const { amount, email, promoCode } = await req.json();
   const origin = req.headers.get("origin") || "https://healthefatherless.com";
 
-  // Promo code grants free access
+  // Promo code grants free access — issue a signed httpOnly cookie
   if (promoCode && promoCode.toUpperCase() === PROMO_CODE) {
-    return NextResponse.json({
-      url: `${origin}/watch/success?free=1&email=${encodeURIComponent(email || "")}`,
+    const token = makeFreeAccessToken();
+    const res = NextResponse.json({
+      url: `${origin}/watch/success?free=1${email ? `&email=${encodeURIComponent(email)}` : ""}`,
     });
+    res.cookies.set(FREE_COOKIE_NAME, token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "lax",
+      maxAge: FREE_TTL_SECONDS,
+      path: "/",
+    });
+    return res;
   }
 
   // Minimum $3 (300 cents)

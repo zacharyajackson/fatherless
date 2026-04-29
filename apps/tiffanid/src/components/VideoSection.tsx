@@ -33,24 +33,6 @@ export default function VideoSection() {
         </div>
       </AnimateIn>
 
-      {/* More Than Music video */}
-      <AnimateIn delay={100} className="px-6 max-w-xl mx-auto mb-4">
-        <div className="rounded-2xl overflow-hidden bg-dark-surface">
-          <video
-            className="w-full aspect-video object-cover"
-            controls
-            playsInline
-            preload="metadata"
-            poster="/images/more-than-music-poster.jpg"
-          >
-            <source src="/images/more-than-music.mp4" type="video/mp4" />
-          </video>
-        </div>
-        <p className="text-white/30 text-[10px] tracking-[0.15em] uppercase font-[family-name:var(--font-syne)] font-600 text-center mt-2">
-          More Than Music
-        </p>
-      </AnimateIn>
-
       {/* YouTube Embeds */}
       <div className="px-6 max-w-xl mx-auto space-y-4">
         {youtubeVideos.map((video, i) => (

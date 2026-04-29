@@ -24,6 +24,7 @@ export default function HeroSection() {
             src="/images/profile.png"
             alt="Tiffani D"
             fill
+            sizes="(min-width: 768px) 128px, 112px"
             className="object-cover"
             priority
           />
@@ -37,7 +38,7 @@ export default function HeroSection() {
           alt="TIFFANI D"
           width={280}
           height={60}
-          className="brightness-0 invert"
+          className="brightness-0 invert h-auto"
           priority
         />
       </div>

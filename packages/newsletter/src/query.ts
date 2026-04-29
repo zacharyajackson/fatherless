@@ -1,20 +1,12 @@
 import { Pool } from "pg";
 import type { Source } from "./types";
+import { buildPoolConfig } from "./pgConfig";
 
 let pool: Pool | null = null;
 
 function getPool(): Pool {
   if (pool) return pool;
-  const connectionString = process.env.DATABASE_URL;
-  if (!connectionString) {
-    throw new Error("DATABASE_URL is not set");
-  }
-  pool = new Pool({
-    connectionString,
-    max: 3,
-    idleTimeoutMillis: 10_000,
-    ssl: connectionString.includes("sslmode=") ? undefined : { rejectUnauthorized: false },
-  });
+  pool = new Pool(buildPoolConfig());
   return pool;
 }
 

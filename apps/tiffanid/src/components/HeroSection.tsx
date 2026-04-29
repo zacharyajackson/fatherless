@@ -1,4 +1,5 @@
 import Image from "next/image";
+import NewsletterTrigger from "./NewsletterTrigger";
 
 export default function HeroSection() {
   return (
@@ -20,7 +21,7 @@ export default function HeroSection() {
         {/* Profile image */}
         <div className="relative w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden animate-glow-pulse">
           <Image
-            src="/images/banner.png"
+            src="/images/profile.png"
             alt="Tiffani D"
             fill
             className="object-cover"
@@ -48,6 +49,11 @@ export default function HeroSection() {
 
       {/* Decorative gold line */}
       <div className="mt-4 w-12 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
+
+      {/* Newsletter CTA */}
+      <div className="mt-5 relative z-10">
+        <NewsletterTrigger />
+      </div>
     </section>
   );
 }

@@ -4,7 +4,9 @@
   "private": true,
   "type": "module",
   "exports": {
-    "./animate-in": "./src/AnimateIn.tsx"
+    "./animate-in": "./src/AnimateIn.tsx",
+    "./newsletter-form": "./src/NewsletterForm.tsx",
+    "./newsletter-modal": "./src/NewsletterModal.tsx"
   },
   "peerDependencies": {
     "react": "^19.0.0",

@@ -2,6 +2,7 @@ import AnimateIn from "@repo/ui/animate-in";
 import Image from "next/image";
 
 const youtubeVideos = [
+  { id: "0xeBNrqAT8Q", title: "Not By Sight" },
   { id: "_qkuugs4DDA", title: "My Year" },
   { id: "v5NXUgIPpHs", title: "Belly Out" },
   { id: "W8HAXbJJO64", title: "Real Estate" },

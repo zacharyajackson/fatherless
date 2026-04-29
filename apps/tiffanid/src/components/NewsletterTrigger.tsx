@@ -24,8 +24,6 @@ export default function NewsletterTrigger() {
         onClose={() => setOpen(false)}
         endpoint="/api/subscribe"
         theme="dark"
-        title="Newsletter"
-        subtitle="Subscribe for new music, films, and announcements."
       />
     </>
   );

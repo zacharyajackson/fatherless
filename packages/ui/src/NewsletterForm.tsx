@@ -15,13 +15,13 @@ export type Theme = "dark" | "light";
 const themes = {
   dark: {
     label:
-      "block text-white/45 text-[10px] tracking-[0.28em] uppercase font-[family-name:var(--font-syne)] font-600 mb-2",
+      "block text-white/55 text-[11px] tracking-[0.28em] uppercase font-[family-name:var(--font-syne)] font-600 mb-3.5",
     optional:
       "ml-2 normal-case tracking-normal text-white/30 text-[11px] font-[family-name:var(--font-dm-sans)] font-400 italic",
     input:
-      "w-full bg-transparent border-0 border-b border-white/15 px-0 py-2.5 text-white text-base placeholder-white/25 focus:outline-none focus:border-gold/70 transition-colors font-[family-name:var(--font-dm-sans)]",
+      "w-full bg-white/[0.02] hover:bg-white/[0.035] focus:bg-white/[0.04] border border-white/[0.08] focus:border-gold/60 rounded-xl px-5 py-4 text-white text-base placeholder-white/25 focus:outline-none focus:shadow-[0_0_0_3px_rgba(212,175,55,0.08)] transition-all font-[family-name:var(--font-dm-sans)]",
     chip:
-      "px-4 py-2 rounded-full text-[13px] font-[family-name:var(--font-dm-sans)] font-500 border transition-all",
+      "px-5 py-2.5 rounded-full text-sm font-[family-name:var(--font-dm-sans)] font-500 border transition-all",
     chipIdle:
       "bg-transparent text-white/55 border-white/15 hover:border-white/35 hover:text-white/85",
     chipActive:
@@ -44,13 +44,13 @@ const themes = {
   },
   light: {
     label:
-      "block text-htf-fg text-[10px] tracking-[0.28em] uppercase font-[family-name:var(--font-dm-sans)] font-700 mb-2",
+      "block text-htf-fg text-[11px] tracking-[0.28em] uppercase font-[family-name:var(--font-dm-sans)] font-700 mb-3.5",
     optional:
       "ml-2 normal-case tracking-normal text-htf-fg-subtle text-[11px] font-[family-name:var(--font-dm-sans)] font-400 italic",
     input:
-      "w-full bg-transparent border-0 border-b border-htf-border-strong px-0 py-2.5 text-htf-fg text-base placeholder-htf-fg-subtle/70 focus:outline-none focus:border-htf-accent transition-colors font-[family-name:var(--font-dm-sans)]",
+      "w-full bg-white hover:bg-white border border-htf-border focus:border-htf-accent rounded-xl px-5 py-4 text-htf-fg text-base placeholder-htf-fg-subtle/70 focus:outline-none focus:shadow-[0_0_0_3px_rgba(23,23,23,0.06)] transition-all font-[family-name:var(--font-dm-sans)]",
     chip:
-      "px-4 py-2 rounded-full text-[13px] font-[family-name:var(--font-dm-sans)] font-500 border transition-all",
+      "px-5 py-2.5 rounded-full text-sm font-[family-name:var(--font-dm-sans)] font-500 border transition-all",
     chipIdle:
       "bg-transparent text-htf-fg-muted border-htf-border-strong hover:border-htf-fg hover:text-htf-fg",
     chipActive:
@@ -157,7 +157,7 @@ export default function NewsletterForm({ endpoint, theme, onSuccess }: Props) {
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-7" noValidate>
+    <form onSubmit={onSubmit} className="space-y-9" noValidate>
       {/* Honeypot — hidden from real users */}
       <div aria-hidden="true" style={{ position: "absolute", left: "-10000px", top: "auto", width: 1, height: 1, overflow: "hidden" }}>
         <label>
@@ -172,16 +172,17 @@ export default function NewsletterForm({ endpoint, theme, onSuccess }: Props) {
         </label>
       </div>
 
-      <div className="space-y-5">
+      <div className="space-y-7">
         <div>
           <label htmlFor="nl-name" className={t.label}>
-            Name<span className={t.optional}>optional</span>
+            Name
           </label>
           <input
             id="nl-name"
             name="name"
             type="text"
             autoComplete="name"
+            required
             value={name}
             onChange={(e) => setName(e.target.value)}
             className={t.input}
@@ -230,7 +231,7 @@ export default function NewsletterForm({ endpoint, theme, onSuccess }: Props) {
 
       <fieldset>
         <legend className={t.label}>What brings you here</legend>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2.5">
           {INTERESTS.map((i) => {
             const active = interests.includes(i.value);
             return (

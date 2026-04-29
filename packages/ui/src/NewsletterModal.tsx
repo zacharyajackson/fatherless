@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import NewsletterForm, { type Theme } from "./NewsletterForm";
 
 type Props = {
@@ -20,6 +21,9 @@ export default function NewsletterModal({
   title = "Stay in the loop",
   subtitle = "New music, films, and announcements — only when there's something worth sending.",
 }: Props) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
@@ -34,11 +38,11 @@ export default function NewsletterModal({
     };
   }, [open, onClose]);
 
-  if (!open) return null;
+  if (!open || !mounted) return null;
 
   const isDark = theme === "dark";
 
-  return (
+  return createPortal(
     <div
       className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6"
       role="dialog"
@@ -49,38 +53,38 @@ export default function NewsletterModal({
         type="button"
         aria-label="Close"
         onClick={onClose}
-        className="absolute inset-0 bg-black/75 backdrop-blur-sm cursor-default"
+        className="absolute inset-0 bg-black/80 backdrop-blur-md cursor-default"
       />
 
       <div
-        className={
+        className={`relative w-full max-w-xl rounded-2xl px-8 sm:px-14 pt-14 pb-10 sm:pt-16 sm:pb-14 shadow-2xl max-h-[92vh] overflow-y-auto ${
           isDark
-            ? "relative w-full max-w-lg rounded-2xl bg-dark-card border border-white/[0.06] px-7 sm:px-10 pt-12 pb-8 sm:pt-14 sm:pb-10 shadow-2xl shadow-black/70 max-h-[92vh] overflow-y-auto"
-            : "relative w-full max-w-lg rounded-2xl bg-htf-bg border border-htf-border px-7 sm:px-10 pt-12 pb-8 sm:pt-14 sm:pb-10 shadow-2xl shadow-black/20 max-h-[92vh] overflow-y-auto"
-        }
+            ? "bg-dark-card border border-white/[0.06] shadow-black/70"
+            : "bg-htf-bg border border-htf-border shadow-black/20"
+        }`}
         style={{ animation: "scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards" }}
       >
         <button
           type="button"
           onClick={onClose}
           aria-label="Close"
-          className={
+          className={`absolute top-5 right-5 w-9 h-9 flex items-center justify-center rounded-full transition-colors ${
             isDark
-              ? "absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-white/40 hover:text-white hover:bg-white/[0.06] transition-colors"
-              : "absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full text-htf-fg-muted hover:text-htf-fg hover:bg-htf-bg-muted transition-colors"
-          }
+              ? "text-white/40 hover:text-white hover:bg-white/[0.06]"
+              : "text-htf-fg-muted hover:text-htf-fg hover:bg-htf-bg-muted"
+          }`}
         >
           <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 6l12 12M6 18L18 6" />
           </svg>
         </button>
 
-        <div className="mb-8">
+        <div className="mb-10 sm:mb-12">
           <h2
             className={
               isDark
-                ? "font-[family-name:var(--font-syne)] text-3xl sm:text-4xl font-700 tracking-[-0.01em] leading-[1.05] text-white"
-                : "font-[family-name:var(--font-fraunces)] text-3xl sm:text-4xl font-800 leading-[0.98] tracking-[-0.02em] text-htf-fg"
+                ? "font-[family-name:var(--font-syne)] text-4xl sm:text-5xl font-700 tracking-[-0.015em] leading-[1] text-white"
+                : "font-[family-name:var(--font-fraunces)] text-4xl sm:text-5xl font-800 leading-[0.98] tracking-[-0.02em] text-htf-fg"
             }
           >
             {title}
@@ -89,15 +93,15 @@ export default function NewsletterModal({
             aria-hidden="true"
             className={
               isDark
-                ? "mt-4 w-10 h-px bg-gradient-to-r from-gold via-gold to-transparent"
-                : "mt-4 w-10 h-px bg-htf-fg/40"
+                ? "mt-6 w-12 h-px bg-gold"
+                : "mt-6 w-12 h-px bg-htf-fg"
             }
           />
           <p
             className={
               isDark
-                ? "mt-4 text-white/55 text-[15px] leading-relaxed font-[family-name:var(--font-dm-sans)] max-w-[420px]"
-                : "mt-4 text-htf-fg-muted text-[15px] leading-relaxed font-[family-name:var(--font-dm-sans)] max-w-[420px]"
+                ? "mt-6 text-white/60 text-[15px] sm:text-base leading-relaxed font-[family-name:var(--font-dm-sans)] max-w-[440px]"
+                : "mt-6 text-htf-fg-muted text-[15px] sm:text-base leading-relaxed font-[family-name:var(--font-dm-sans)] max-w-[440px]"
             }
           >
             {subtitle}
@@ -106,6 +110,7 @@ export default function NewsletterModal({
 
         <NewsletterForm endpoint={endpoint} theme={theme} />
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

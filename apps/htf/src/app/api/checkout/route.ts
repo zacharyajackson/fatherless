@@ -29,28 +29,44 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Minimum amount is $3" }, { status: 400 });
   }
 
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+  const secretKey = process.env.STRIPE_SECRET_KEY;
+  if (!secretKey) {
+    console.error("STRIPE_SECRET_KEY is not set");
+    return NextResponse.json(
+      { error: "Payments are not configured. Please contact support." },
+      { status: 500 }
+    );
+  }
 
-  const session = await stripe.checkout.sessions.create({
-    payment_method_types: ["card"],
-    customer_email: email || undefined,
-    line_items: [
-      {
-        price_data: {
-          currency: "usd",
-          product_data: {
-            name: "Sophia Smiles — Full Film",
-            description: "A moving story about the struggles of a single mother. A film by TIFFANI D.",
+  try {
+    const stripe = new Stripe(secretKey);
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
+      customer_email: email || undefined,
+      line_items: [
+        {
+          price_data: {
+            currency: "usd",
+            product_data: {
+              name: "Sophia Smiles — Full Film",
+              description: "A moving story about the struggles of a single mother. A film by TIFFANI D.",
+            },
+            unit_amount: amount,
           },
-          unit_amount: amount,
+          quantity: 1,
         },
-        quantity: 1,
-      },
-    ],
-    mode: "payment",
-    success_url: `${origin}/watch/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${origin}/watch`,
-  });
+      ],
+      mode: "payment",
+      success_url: `${origin}/watch/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${origin}/watch`,
+    });
 
-  return NextResponse.json({ url: session.url });
+    return NextResponse.json({ url: session.url });
+  } catch (err) {
+    console.error("Stripe checkout error:", err);
+    return NextResponse.json(
+      { error: "Could not start checkout. Please try again." },
+      { status: 500 }
+    );
+  }
 }

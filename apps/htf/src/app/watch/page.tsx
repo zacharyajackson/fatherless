@@ -25,19 +25,27 @@ export default function WatchPage() {
       return;
     }
 
-    const res = await fetch("/api/checkout", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ amount: amountCents, email, promoCode }),
-    });
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount: amountCents, email, promoCode }),
+      });
 
-    const data = await res.json();
-    if (data.url) {
-      window.location.href = data.url;
-    } else {
-      setError(data.error || "Something went wrong. Please try again.");
-      setLoading(false);
+      const data = (await res.json().catch(() => null)) as
+        | { url?: string; error?: string }
+        | null;
+
+      if (res.ok && data?.url) {
+        window.location.href = data.url;
+        return;
+      }
+
+      setError(data?.error || "Something went wrong. Please try again.");
+    } catch {
+      setError("Network error. Please try again.");
     }
+    setLoading(false);
   };
 
   const displayAmount = parseFloat(amount || "0");
@@ -52,7 +60,8 @@ export default function WatchPage() {
             alt="Sophia Smiles"
             width={200}
             height={275}
-            className="mx-auto rounded-xl mb-6 shadow-2xl shadow-black/10"
+            className="mx-auto rounded-xl mb-6 shadow-2xl shadow-black/10 h-auto w-auto"
+            priority
           />
           <h1 className="font-[family-name:var(--font-fraunces)] text-3xl font-700 text-htf-fg mb-2">
             Watch Sophia Smiles

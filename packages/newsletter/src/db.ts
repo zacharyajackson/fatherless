@@ -1,37 +1,5 @@
-import { Pool } from "pg";
 import type { Interest, Source } from "./types";
-import { buildPoolConfig } from "./pgConfig";
-
-let pool: Pool | null = null;
-let migrated = false;
-
-function getPool(): Pool {
-  if (pool) return pool;
-  pool = new Pool(buildPoolConfig());
-  return pool;
-}
-
-async function ensureSchema(): Promise<void> {
-  if (migrated) return;
-  const p = getPool();
-  await p.query(`
-    CREATE TABLE IF NOT EXISTS subscribers (
-      id BIGSERIAL PRIMARY KEY,
-      email TEXT NOT NULL,
-      name TEXT,
-      phone TEXT,
-      interests TEXT[] NOT NULL DEFAULT '{}',
-      source TEXT NOT NULL,
-      ip TEXT,
-      user_agent TEXT,
-      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-      UNIQUE (email, source)
-    );
-    CREATE INDEX IF NOT EXISTS subscribers_created_at_idx ON subscribers (created_at DESC);
-    CREATE INDEX IF NOT EXISTS subscribers_source_idx ON subscribers (source);
-  `);
-  migrated = true;
-}
+import { getPool, ensureSchema } from "./pgConfig";
 
 export async function insertSubscriber(input: {
   email: string;

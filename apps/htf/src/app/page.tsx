@@ -63,6 +63,8 @@ export default function HomePage() {
             width={800}
             height={1100}
             className="w-full h-auto"
+            sizes="(min-width: 672px) 672px, 100vw"
+            priority
           />
         </div>
       </section>
